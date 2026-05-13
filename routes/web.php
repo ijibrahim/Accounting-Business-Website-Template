@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('/');
 Route::get('/blogs', function () {
     return view('layouts.blog');
 })->name('blogs');
@@ -20,6 +20,9 @@ Route::get('/contacts', function () {
 Route::get('/payroll', function () {
     return view('layouts.payroll');
 })->name('payroll');
+Route::get('/referral', function () {
+    return view('layouts.referral');
+})->name('referral');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {

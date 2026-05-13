@@ -106,7 +106,7 @@
       <!-- Graphic col -->
       <div class="col-lg-5 fade-up">
         <div class="intro-graphic">
-          <div class="label-pill light mb-3">Why Outsource?</div>
+          <div class="label-pill light mb-3 text-danger">Why Outsource?</div>
           <h3 style="color:var(--white);font-size:1.6rem;margin-bottom:22px;position:relative;z-index:1;">Is payroll eating into your working day?</h3>
           <div class="intro-graphic-badge">
             <div class="igb-icon"><i class="bi bi-clock-history"></i></div>

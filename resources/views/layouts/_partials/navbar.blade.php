@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
   <div class="container">
-    <a class="navbar-brand" href="#">Cain <span>&amp; Co</span></a>
+    <a class="navbar-brand" href="{{ route('/') }}">Toha <span>Vhavan</span></a>
     <div class="d-flex align-items-center gap-2 ms-auto d-lg-none">
       <button id="darkToggle" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
     </div>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ route('/') }}">Home</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="{{ route('about') }}" data-bs-toggle="dropdown">About</a>
           <ul class="dropdown-menu">
@@ -17,7 +17,7 @@
             <li><a class="dropdown-item" href="#testimonials">Testimonials</a></li>
             <li><a class="dropdown-item" href="#coverage">Client Coverage</a></li>
             <li><a class="dropdown-item" href="#curry">Curry &amp; Co</a></li>
-            <li><a class="dropdown-item" href="#referral">Referral Offer</a></li>
+            <li><a class="dropdown-item" href="{{ route('referral') }}">Referral Offer</a></li>
             <li><a class="dropdown-item" href="#community">Community</a></li>
           </ul>
         </li>

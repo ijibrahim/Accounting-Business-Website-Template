@@ -391,6 +391,24 @@
       <div class="col-sm-6 col-lg-3 fade-up fade-up-delay-1">
         <div style="background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:14px;overflow:hidden;text-align:center;transition:all .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='var(--gold)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(201,168,76,.2)'">
           <div style="height:180px;background:linear-gradient(135deg,var(--navy-light),#2a4a7a);display:flex;align-items:center;justify-content:center;">
+            <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--navy));border:3px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--head-font);font-size:2rem;font-weight:700;color:var(--white);">
+              <img src="{{ asset('assets/images/masud.jpeg') }}" alt="Md Masud Forkan">
+            </div>
+          </div>
+          <div style="padding:24px 20px;">
+            <h5 style="color:var(--white);font-size:1rem;">Md Masud Forkan </h5>
+            <div style="color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Senior Accountant</div>
+            <p style="color:rgba(255,255,255,.5);font-size:.82rem;line-height:1.7;">AAT qualified with 15 years in London finance. Rebecca founded Cain &amp; Co with a passion for small business support.</p>
+            <div style="display:flex;justify-content:center;gap:10px;margin-top:14px;">
+              <a href="#" style="color:rgba(255,255,255,.4);font-size:1rem;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(255,255,255,.4)'"><i class="bi bi-linkedin"></i></a>
+              <a href="#" style="color:rgba(255,255,255,.4);font-size:1rem;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(255,255,255,.4)'"><i class="bi bi-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 fade-up fade-up-delay-1">
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:14px;overflow:hidden;text-align:center;transition:all .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='var(--gold)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(201,168,76,.2)'">
+          <div style="height:180px;background:linear-gradient(135deg,var(--navy-light),#2a4a7a);display:flex;align-items:center;justify-content:center;">
             <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--navy));border:3px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--head-font);font-size:2rem;font-weight:700;color:var(--white);">RC</div>
           </div>
           <div style="padding:24px 20px;">
@@ -518,68 +536,7 @@
 <!-- ===========================
      REFERRAL
 =========================== -->
-<section id="referral" class="section-pad bg-offwhite">
-  <div class="container">
-    <div class="text-center mb-5 fade-up">
-      <div class="label-pill">🥂 Referral Rewards</div>
-      <h2 class="section-title">Referral Reward — <span class="gold">Champagne's on Us!</span></h2>
-      <div class="divider-gold mx-auto"></div>
-      <p class="section-subtitle mx-auto text-center">Know a business that needs brilliant bookkeeping? Refer them to us and we'll send you a bottle of Moët &amp; Chandon as a thank you. Every time.</p>
-    </div>
-    <div class="row g-4 mb-5">
-      <div class="col-md-4 fade-up fade-up-delay-1">
-        <div class="referral-step">
-          <div class="referral-step-num">1</div>
-          <h5>Refer a Friend or Colleague</h5>
-          <p>Tell them about Cain &amp; Co and share their details with us using the simple form below.</p>
-        </div>
-      </div>
-      <div class="col-md-4 fade-up fade-up-delay-2">
-        <div class="referral-step">
-          <div class="referral-step-num">2</div>
-          <h5>They Sign Up With Us</h5>
-          <p>Once your referral becomes a Cain &amp; Co client, we get started on making their books beautiful.</p>
-        </div>
-      </div>
-      <div class="col-md-4 fade-up fade-up-delay-3">
-        <div class="referral-step">
-          <div class="referral-step-num">3</div>
-          <h5>We Send You Champagne 🥂</h5>
-          <p>A bottle of Moët &amp; Chandon lands on your doorstep. No limits — refer 10 clients, get 10 bottles!</p>
-        </div>
-      </div>
-    </div>
-    <!-- Referral Form -->
-    <div class="row justify-content-center fade-up">
-      <div class="col-lg-7">
-        <div style="background:var(--white);border:1px solid rgba(0,0,0,.07);border-radius:16px;padding:40px 36px;box-shadow:0 8px 40px rgba(0,0,0,.06);">
-          <h4 style="font-size:1.2rem;margin-bottom:20px;">Submit a Referral</h4>
-          <div class="row g-3">
-            <div class="col-sm-6">
-              <label class="form-label" style="color:#555;">Your Name</label>
-              <input type="text" class="form-control" style="background:#f8f6f1;color:var(--navy);border-color:rgba(0,0,0,.1);" placeholder="Rebecca Smith">
-            </div>
-            <div class="col-sm-6">
-              <label class="form-label" style="color:#555;">Referral's Business Name</label>
-              <input type="text" class="form-control" style="background:#f8f6f1;color:var(--navy);border-color:rgba(0,0,0,.1);" placeholder="Acme Ltd">
-            </div>
-            <div class="col-sm-6">
-              <label class="form-label" style="color:#555;">Referral's Email</label>
-              <input type="email" class="form-control" style="background:#f8f6f1;color:var(--navy);border-color:rgba(0,0,0,.1);" placeholder="info@acme.co.uk">
-            </div>
-            <div class="col-sm-6">
-              <label class="form-label" style="color:#555;">Referral's Phone</label>
-              <input type="tel" class="form-control" style="background:#f8f6f1;color:var(--navy);border-color:rgba(0,0,0,.1);" placeholder="07700 900000">
-            </div>
-            <div class="col-12 mt-2">
-              <button class="btn btn-gold w-100">Submit Referral &amp; Claim My Champagne 🥂</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ===========================
      COVERAGE

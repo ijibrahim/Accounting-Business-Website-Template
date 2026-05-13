@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row g-5">
       <div class="col-lg-4">
-        <div class="footer-brand">Cain <span>&amp; Co</span></div>
+        <div class="footer-brand lowercase">TOHA BHAVAN ASSOCIATES LIMITED</div>
         <p class="footer-desc">London's trusted bookkeeping specialists. ISO 9001 certified. AAT qualified. Fixed fees. Zero HMRC surprises. Since 2012.</p>
         <div class="footer-social">
           <a href="#" class="social-btn" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
@@ -27,17 +27,17 @@
       </div>
       <div class="col-6 col-md-3 col-lg-2">
         <div class="footer-heading">Company</div>
-        <a href="#about" class="footer-link">About Us</a>
+        <a href="{{ route('about') }}" class="footer-link">About Us</a>
         <a href="#team" class="footer-link">Meet the Team</a>
         <a href="#testimonials" class="footer-link">Testimonials</a>
         <a href="#community" class="footer-link">Community</a>
         <a href="#curry" class="footer-link">Curry &amp; Co</a>
-        <a href="#blog" class="footer-link">Blog</a>
+        <a href="{{ route('blogs') }}" class="footer-link">Blog</a>
       </div>
       <div class="col-6 col-md-3 col-lg-2">
         <div class="footer-heading">Services</div>
         <a href="#services" class="footer-link">Bookkeeping</a>
-        <a href="#services" class="footer-link">Payroll</a>
+        <a href="{{ route('payroll') }}" class="footer-link">Payroll</a>
         <a href="#services" class="footer-link">Auto Enrolment</a>
         <a href="#pricing" class="footer-link">Pricing</a>
         <a href="#trial" class="footer-link">Free Trial</a>
@@ -59,7 +59,7 @@
     </div>
     <div class="footer-bottom">
       <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-        <p>© 2025 Cain &amp; Co Bookkeeping Services Ltd. All rights reserved. Registered in England &amp; Wales No. 07829416.</p>
+        <p>© 2025 TOHA BHAVAN ASSOCIATES LIMITED. All rights reserved. Registered in England &amp; Wales No. 07829416.</p>
         <div class="d-flex gap-3">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms &amp; Conditions</a>
