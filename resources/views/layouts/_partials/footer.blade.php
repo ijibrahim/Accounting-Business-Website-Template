@@ -53,7 +53,7 @@
         <div style="margin-top:20px;">
           <div style="color:rgba(255,255,255,.45);font-size:.82rem;">📞 020 7946 0321</div>
           <div style="color:rgba(255,255,255,.45);font-size:.82rem;margin-top:6px;">✉️ hello@cainandco.co.uk</div>
-          <div style="color:rgba(255,255,255,.45);font-size:.82rem;margin-top:6px;">📍 24 Cannon Street, London EC4M</div>
+          <div style="color:rgba(255,255,255,.45);font-size:.82rem;margin-top:6px;">📍 245 Whitechapel Road, 2nd Floor, London, England, E1 1DB</div>
         </div>
       </div>
     </div>

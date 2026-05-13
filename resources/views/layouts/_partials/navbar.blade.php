@@ -25,7 +25,7 @@
           <a class="nav-link dropdown-toggle" href="#services" data-bs-toggle="dropdown">Services</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#services">Bookkeeping</a></li>
-            <li><a class="dropdown-item" href="#services">Payroll</a></li>
+            <li><a class="dropdown-item" href="{{ route('payroll') }}">Payroll</a></li>
             <li><a class="dropdown-item" href="#services">Auto Enrolment</a></li>
           </ul>
         </li>
@@ -34,7 +34,7 @@
       </ul>
       <div class="d-flex align-items-center gap-2">
         <button id="darkToggle" class="d-none d-lg-block" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
-        <a href="#contact" class="nav-link nav-cta-btn">Free Consultation</a>
+        <a href="{{ route('contacts') }}" class="nav-link nav-cta-btn">Free Consultation</a>
       </div>
     </div>
   </div>

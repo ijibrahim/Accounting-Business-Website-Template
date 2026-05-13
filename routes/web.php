@@ -14,6 +14,12 @@ Route::get('/about', function () {
 Route::get('/services', function () {
     return view('layouts.service');
 })->name('services');
+Route::get('/contacts', function () {
+    return view('layouts.contact');
+})->name('contacts');
+Route::get('/payroll', function () {
+    return view('layouts.payroll');
+})->name('payroll');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
