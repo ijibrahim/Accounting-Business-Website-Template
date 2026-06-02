@@ -552,15 +552,33 @@
         </aside>
 
         <main class="admin-main">
+
             <header class="admin-topbar">
                 <div>
                     <div class="admin-eyebrow">@yield('eyebrow', 'Admin')</div>
                     <h1 class="admin-title">@yield('title', 'Dashboard')</h1>
                 </div>
-                <a href="{{ url('/') }}" class="btn btn-outline-secondary btn-sm">
-                    <i class="bi bi-box-arrow-up-right"></i>
-                    View Site
-                </a>
+
+                @auth
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="small text-muted">
+                            {{ auth()->user()->name }}
+                        </span>
+                        <a href="{{ url('/') }}" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-box-arrow-up-right"></i>
+                            View Site
+                        </a>
+
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                @endauth
             </header>
 
             @yield('content')

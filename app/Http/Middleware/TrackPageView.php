@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Jenssegers\Agent\Agent;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\VisitorLog;
+use Illuminate\Support\Facades\Auth;
+use Stevebauman\Location\Facades\Location;
 
 class TrackPageView
 {
@@ -36,8 +39,8 @@ class TrackPageView
             : ($agent->isMobile() ? 'Mobile' : 'Desktop');
 
         // Duplicate prevention (30 min)
-        $cacheKey = 'page_view_'.md5(
-            $request->ip().$request->path()
+        $cacheKey = 'page_view_' . md5(
+            $request->ip() . $request->path()
         );
 
         if (! cache()->has($cacheKey)) {
@@ -51,7 +54,7 @@ class TrackPageView
             PageView::create([
                 'blog_post_id' => $request->attributes->get('blog_post_id'),
                 'url' => $request->fullUrl(),
-                'path' => '/'.ltrim($request->path(), '/'),
+                'path' => '/' . ltrim($request->path(), '/'),
                 'referrer' => $request->headers->get('referer'),
 
                 'ip_hash' => hash('sha256', $request->ip()),
@@ -59,6 +62,19 @@ class TrackPageView
                 'device' => $device,
                 'browser' => $agent->browser(),
                 'platform' => $agent->platform(),
+            ]);
+
+            $ip = $request->ip();
+
+            $position = Location::get($ip);
+
+            VisitorLog::create([
+                'user_id' => Auth::user()->id(),
+                'ip' => $ip,
+                'country' => $position?->countryName,
+                'region' => $position?->regionName,
+                'city' => $position?->cityName,
+                'url' => $request->fullUrl(),
             ]);
         }
 

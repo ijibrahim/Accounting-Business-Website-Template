@@ -41,6 +41,149 @@
 
     <div class="row g-4">
 
+        <div class="col-lg-6">
+
+            <section class="admin-card h-100">
+
+                <div class="border-bottom p-3">
+                    <h2 class="h5 mb-0">Top Countries</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-admin mb-0">
+                        <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th class="text-end">Visits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @forelse($topCountries as $country)
+                                <tr>
+                                    <td>{{ $country->country ?? 'Unknown' }}</td>
+                                    <td class="text-end">
+                                        {{ number_format($country->visits) }}
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="2" class="text-center py-4">
+                                        No data found.
+                                    </td>
+                                </tr>
+                            @endforelse
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </div>
+        <div class="col-lg-6">
+
+            <section class="admin-card h-100">
+
+                <div class="border-bottom p-3">
+                    <h2 class="h5 mb-0">Top Cities</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-admin mb-0">
+                        <thead>
+                            <tr>
+                                <th>City</th>
+                                <th class="text-end">Visits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @forelse($topCities as $city)
+                                <tr>
+                                    <td>{{ $city->city ?? 'Unknown' }}</td>
+                                    <td class="text-end">
+                                        {{ number_format($city->visits) }}
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="2" class="text-center py-4">
+                                        No data found.
+                                    </td>
+                                </tr>
+                            @endforelse
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </div>
+
+        <div class="col-12">
+
+            <section class="admin-card">
+
+                <div class="border-bottom p-3">
+                    <h2 class="h5 mb-0">Recent Visitors</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-admin mb-0">
+
+                        <thead>
+                            <tr>
+                                <th>Country</th>
+                                <th>City</th>
+                                <th>IP</th>
+                                <th>Browser</th>
+                                <th>Device</th>
+                                <th>Visited</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @forelse($recentVisitors as $visit)
+                                <tr>
+
+                                    <td>{{ $visit->country }}</td>
+
+                                    <td>{{ $visit->city }}</td>
+
+                                    <td>
+                                        <code>{{ $visit->ip }}</code>
+                                    </td>
+
+                                    <td>{{ $visit->browser }}</td>
+
+                                    <td>{{ $visit->device }}</td>
+
+                                    <td>
+                                        {{ $visit->created_at->diffForHumans() }}
+                                    </td>
+
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center py-4">
+                                        No visitors found.
+                                    </td>
+                                </tr>
+                            @endforelse
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </section>
+
+        </div>
+
+
         <div class="col-12">
 
             <section class="admin-card">
@@ -64,7 +207,8 @@
                                     <td>{{ $post->title }}</td>
                                     <td class="text-end">{{ number_format($post->page_views_count) }}</td>
                                     <td class="text-end">
-                                        <a href="{{ route('blogs.show', $post->slug) }}" class="btn btn-outline-secondary btn-sm">
+                                        <a href="{{ route('blogs.show', $post->slug) }}"
+                                            class="btn btn-outline-secondary btn-sm">
                                             <i class="bi bi-box-arrow-up-right"></i>
                                         </a>
                                     </td>

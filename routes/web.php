@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\FaqController;
@@ -56,7 +57,19 @@ Route::get('/dashboard', function () {
     return redirect()->route('admin.dashboard');
 })->name('dashboard');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+
+Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])
+    ->name('admin.login');
+
+Route::post('/admin/login', [AdminAuthController::class, 'login'])
+    ->name('admin.login.submit');
+
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])
+    ->name('admin.logout');
+
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/settings', [DashboardController::class, 'setting'])->name('settings');
     Route::put('/settings/update', [DashboardController::class, 'update'])->name('settings.update');
@@ -68,3 +81,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('blog-posts', BlogPostController::class);
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

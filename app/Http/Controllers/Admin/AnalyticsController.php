@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use App\Models\PageView;
+use App\Models\VisitorLog;
 use Carbon\Carbon;
 use Illuminate\View\View;
 
@@ -87,6 +88,24 @@ class AnalyticsController extends Controller
             ->limit(10)
             ->get();
 
+        $topCountries = VisitorLog::query()
+            ->selectRaw('country, COUNT(*) as visits')
+            ->groupBy('country')
+            ->orderByDesc('visits')
+            ->limit(10)
+            ->get();
+
+        $topCities = VisitorLog::query()
+            ->selectRaw('city, COUNT(*) as visits')
+            ->groupBy('city')
+            ->orderByDesc('visits')
+            ->limit(10)
+            ->get();
+
+        $recentVisitors = VisitorLog::latest()
+            ->take(20)
+            ->get();
+
         return view('admin.analytics.index', compact(
             'totalVisits',
             'todayVisits',
@@ -98,7 +117,10 @@ class AnalyticsController extends Controller
             'topBrowsers',
             'topDevices',
             'dailyViews',
-            'topBlogPosts'
+            'topBlogPosts',
+            'topCountries',
+            'topCities',
+            'recentVisitors'
         ));
     }
 }

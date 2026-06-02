@@ -36,13 +36,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::query()->updateOrCreate(
-            ['email' => 'admin@example.com'],
-            [
-                'name' => 'Admin User',
-                'password' => 'password',
-            ]
-        );
+        $this->call([
+            RolePermissionSeeder::class,
+            AdminUserSeeder::class,
+        ]);
 
         SiteSetting::query()->updateOrCreate(
             ['id' => 1],
@@ -65,8 +62,8 @@ class DatabaseSeeder extends Seeder
                 'og_image' => 'assets/images/og-image.jpg',
                 'twitter_image' => 'assets/images/og-image.jpg',
                 'canonical_url' => 'https://bookkeepersuk.com',
-                'created_by' => $admin->id,
-                'updated_by' => $admin->id,
+                'created_by' => 1,
+                'updated_by' => 1,
             ]
         );
 
@@ -86,8 +83,8 @@ class DatabaseSeeder extends Seeder
                 'meta_keywords' => 'about Cain and Co, ISO 9001 bookkeepers, bookkeeping team',
                 'meta_description' => 'Learn about Cain & Co, a trusted bookkeeping and payroll support team for UK businesses.',
                 'og_image' => 'assets/images/about-cain-and-co.jpg',
-                'created_by' => $admin->id,
-                'updated_by' => $admin->id,
+                'created_by' => 1,
+                'updated_by' => 1,
             ]
         );
 
@@ -103,20 +100,20 @@ class DatabaseSeeder extends Seeder
                 [
                     'title' => $title,
                     'short_description' => $description,
-                    'hero_title' => $title.' Services for Growing Businesses',
+                    'hero_title' => $title . ' Services for Growing Businesses',
                     'hero_subtitle' => $description,
-                    'content' => $description.' Cain & Co keeps the process organised, compliant and easy to understand.',
+                    'content' => $description . ' Cain & Co keeps the process organised, compliant and easy to understand.',
                     'icon' => $icon,
                     'starting_price' => $price,
                     'price_label' => '+ VAT per month',
                     'is_featured' => $slug === 'bookkeeping',
                     'is_active' => true,
                     'sort_order' => $index + 1,
-                    'meta_title' => $title.' Services | Cain & Co',
-                    'meta_keywords' => strtolower($title).', Cain and Co, UK bookkeeping services',
+                    'meta_title' => $title . ' Services | Cain & Co',
+                    'meta_keywords' => strtolower($title) . ', Cain and Co, UK bookkeeping services',
                     'meta_description' => $description,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
 
@@ -124,7 +121,7 @@ class DatabaseSeeder extends Seeder
                 ServiceFeature::query()->updateOrCreate(
                     ['service_id' => $service->id, 'title' => $feature],
                     [
-                        'description' => $feature.' included with '.$service->title.' support.',
+                        'description' => $feature . ' included with ' . $service->title . ' support.',
                         'icon' => 'bi-check-circle-fill',
                         'sort_order' => $featureIndex + 1,
                     ]
@@ -149,8 +146,8 @@ class DatabaseSeeder extends Seeder
                     'is_featured' => $featured,
                     'is_active' => true,
                     'sort_order' => $index + 1,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
 
@@ -162,14 +159,16 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        foreach ([
-            ['Restaurants', 'restaurants', 'bi-egg-fried', 'Bookkeeping support for busy food and hospitality operators.'],
-            ['Hospitality', 'hospitality', 'bi-building', 'Clear records for hotels, venues and service-led hospitality businesses.'],
-            ['Construction', 'construction', 'bi-hammer', 'CIS, payroll and transaction-heavy bookkeeping support.'],
-            ['Accountants', 'accountants', 'bi-calculator', 'Dependable bookkeeping support for practices and their clients.'],
-            ['Consultants', 'consultants', 'bi-briefcase', 'Fixed-fee records and reporting for advisory businesses.'],
-            ['Retail', 'retail', 'bi-shop', 'Sales, supplier invoices and VAT kept current.'],
-        ] as $index => [$name, $slug, $icon, $description]) {
+        foreach (
+            [
+                ['Restaurants', 'restaurants', 'bi-egg-fried', 'Bookkeeping support for busy food and hospitality operators.'],
+                ['Hospitality', 'hospitality', 'bi-building', 'Clear records for hotels, venues and service-led hospitality businesses.'],
+                ['Construction', 'construction', 'bi-hammer', 'CIS, payroll and transaction-heavy bookkeeping support.'],
+                ['Accountants', 'accountants', 'bi-calculator', 'Dependable bookkeeping support for practices and their clients.'],
+                ['Consultants', 'consultants', 'bi-briefcase', 'Fixed-fee records and reporting for advisory businesses.'],
+                ['Retail', 'retail', 'bi-shop', 'Sales, supplier invoices and VAT kept current.'],
+            ] as $index => [$name, $slug, $icon, $description]
+        ) {
             Industries::query()->updateOrCreate(
                 ['slug' => $slug],
                 [
@@ -178,11 +177,11 @@ class DatabaseSeeder extends Seeder
                     'icon' => $icon,
                     'is_active' => true,
                     'sort_order' => $index + 1,
-                    'meta_title' => $name.' Bookkeeping Services',
-                    'meta_keywords' => strtolower($name).' bookkeeping, Cain and Co',
+                    'meta_title' => $name . ' Bookkeeping Services',
+                    'meta_keywords' => strtolower($name) . ' bookkeeping, Cain and Co',
                     'meta_description' => $description,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
@@ -201,21 +200,23 @@ class DatabaseSeeder extends Seeder
                     'description' => $description,
                     'is_active' => true,
                     'sort_order' => $index + 1,
-                    'meta_title' => $name.' Articles',
-                    'meta_keywords' => strtolower($name).', bookkeeping blog',
+                    'meta_title' => $name . ' Articles',
+                    'meta_keywords' => strtolower($name) . ', bookkeeping blog',
                     'meta_description' => $description,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
 
         $blogCategory = BlogCategory::query()->where('slug', 'bookkeeping')->first();
-        foreach ([
-            ['The Cain & Co Customer Journey', 'the-cain-and-co-customer-journey'],
-            ['How To Automate Bookkeeping Workflows Efficiently', 'automate-bookkeeping-workflows'],
-            ['Wimbledon Bookkeeping Case Study', 'wimbledon-bookkeeping-case-study'],
-        ] as $index => [$title, $slug]) {
+        foreach (
+            [
+                ['The Cain & Co Customer Journey', 'the-cain-and-co-customer-journey'],
+                ['How To Automate Bookkeeping Workflows Efficiently', 'automate-bookkeeping-workflows'],
+                ['Wimbledon Bookkeeping Case Study', 'wimbledon-bookkeeping-case-study'],
+            ] as $index => [$title, $slug]
+        ) {
             BlogPost::query()->updateOrCreate(
                 ['slug' => $slug],
                 [
@@ -228,18 +229,20 @@ class DatabaseSeeder extends Seeder
                     'published_at' => now()->subDays($index),
                     'meta_title' => $title,
                     'meta_keywords' => 'bookkeeping, Cain and Co, business finance',
-                    'meta_description' => 'Read '.$title.' from Cain & Co.',
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'meta_description' => 'Read ' . $title . ' from Cain & Co.',
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
 
-        foreach ([
-            ['Amanda Hill', 'AH Social Media', 'Professional, knowledgeable, switched on and passionate about the industry.'],
-            ['Joanne Bell', 'Bells Accounting', 'Fast turnaround, excellent value for money and accurate, well-presented work.'],
-            ['Sarah French', 'IT4Automation', 'Knowledgeable, helpful and patient. No query is too much trouble.'],
-        ] as $index => [$client, $company, $quote]) {
+        foreach (
+            [
+                ['Amanda Hill', 'AH Social Media', 'Professional, knowledgeable, switched on and passionate about the industry.'],
+                ['Joanne Bell', 'Bells Accounting', 'Fast turnaround, excellent value for money and accurate, well-presented work.'],
+                ['Sarah French', 'IT4Automation', 'Knowledgeable, helpful and patient. No query is too much trouble.'],
+            ] as $index => [$client, $company, $quote]
+        ) {
             Testimonial::query()->updateOrCreate(
                 ['client_name' => $client, 'company_name' => $company],
                 [
@@ -248,38 +251,42 @@ class DatabaseSeeder extends Seeder
                     'is_featured' => true,
                     'is_active' => true,
                     'sort_order' => $index + 1,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
 
-        foreach ([
-            ['Paul Cain', 'Director'],
-            ['Melanie Regan-Brown', 'Bookkeeper'],
-            ['Grant Dye', 'Bookkeeper'],
-            ['Sam Warwick-Rolf', 'Bookkeeper'],
-            ['Luke Iles', 'Marketing Partner'],
-            ['Bailey Wilshire', 'Marketing Partner'],
-        ] as $index => [$name, $role]) {
+        foreach (
+            [
+                ['Paul Cain', 'Director'],
+                ['Melanie Regan-Brown', 'Bookkeeper'],
+                ['Grant Dye', 'Bookkeeper'],
+                ['Sam Warwick-Rolf', 'Bookkeeper'],
+                ['Luke Iles', 'Marketing Partner'],
+                ['Bailey Wilshire', 'Marketing Partner'],
+            ] as $index => [$name, $role]
+        ) {
             TeamMember::query()->updateOrCreate(
                 ['name' => $name],
                 [
                     'role' => $role,
-                    'bio' => $name.' supports Cain & Co clients with practical, friendly and reliable service.',
+                    'bio' => $name . ' supports Cain & Co clients with practical, friendly and reliable service.',
                     'is_active' => true,
                     'sort_order' => $index + 1,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
 
-        foreach ([
-            ['What is included in bookkeeping from GBP 299/month?', 'Monthly bookkeeping, reconciliations, VAT support and clear reporting.'],
-            ['Can you manage payroll too?', 'Yes, Cain & Co can support bookkeeping, payroll and auto enrolment together.'],
-            ['Do you offer a trial?', 'Yes, we offer a 3-month risk-free trial for qualifying businesses.'],
-        ] as $index => [$question, $answer]) {
+        foreach (
+            [
+                ['What is included in bookkeeping from GBP 299/month?', 'Monthly bookkeeping, reconciliations, VAT support and clear reporting.'],
+                ['Can you manage payroll too?', 'Yes, Cain & Co can support bookkeeping, payroll and auto enrolment together.'],
+                ['Do you offer a trial?', 'Yes, we offer a 3-month risk-free trial for qualifying businesses.'],
+            ] as $index => [$question, $answer]
+        ) {
             Faq::query()->updateOrCreate(
                 ['question' => $question],
                 [
@@ -287,17 +294,19 @@ class DatabaseSeeder extends Seeder
                     'page' => 'home',
                     'is_active' => true,
                     'sort_order' => $index + 1,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
 
-        foreach ([
-            ['No HMRC Fines, Guaranteed', 'Provide requested information on time and if a penalty is issued due to our error, we cover it.'],
-            ['Fast Answers', 'Most questions are answered quickly by a responsive support team.'],
-            ['Fixed Fees', 'Simple monthly pricing with no hidden costs.'],
-        ] as $index => [$title, $description]) {
+        foreach (
+            [
+                ['No HMRC Fines, Guaranteed', 'Provide requested information on time and if a penalty is issued due to our error, we cover it.'],
+                ['Fast Answers', 'Most questions are answered quickly by a responsive support team.'],
+                ['Fixed Fees', 'Simple monthly pricing with no hidden costs.'],
+            ] as $index => [$title, $description]
+        ) {
             Guarantee::query()->updateOrCreate(
                 ['title' => $title],
                 [
@@ -305,30 +314,32 @@ class DatabaseSeeder extends Seeder
                     'icon' => 'bi-patch-check-fill',
                     'is_active' => true,
                     'sort_order' => $index + 1,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
 
-        foreach ([
-            ['Privacy Policy', 'privacy-policy'],
-            ['Terms and Conditions', 'terms-and-conditions'],
-            ['Cookie Policy', 'cookie-policy'],
-            ['AML Policy', 'aml-policy'],
-            ['Complaints Policy', 'complaints-policy'],
-        ] as [$title, $slug]) {
+        foreach (
+            [
+                ['Privacy Policy', 'privacy-policy'],
+                ['Terms and Conditions', 'terms-and-conditions'],
+                ['Cookie Policy', 'cookie-policy'],
+                ['AML Policy', 'aml-policy'],
+                ['Complaints Policy', 'complaints-policy'],
+            ] as [$title, $slug]
+        ) {
             Legal::query()->updateOrCreate(
                 ['slug' => $slug],
                 [
                     'title' => $title,
-                    'content' => '<p>This demo '.$title.' content should be reviewed by a qualified professional before publishing.</p>',
-                    'meta_title' => $title.' | Cain & Co',
-                    'meta_keywords' => strtolower($title).', Cain and Co',
-                    'meta_description' => $title.' for Cain & Co Bookkeeping Services.',
+                    'content' => '<p>This demo ' . $title . ' content should be reviewed by a qualified professional before publishing.</p>',
+                    'meta_title' => $title . ' | Cain & Co',
+                    'meta_keywords' => strtolower($title) . ', Cain and Co',
+                    'meta_description' => $title . ' for Cain & Co Bookkeeping Services.',
                     'is_active' => true,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
@@ -354,12 +365,14 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        foreach ([
-            ['home', "London's Trusted Bookkeepers", 'Bookkeeping London'],
-            ['bookkeeping', 'Bookkeeping Services', 'Bookkeeping Services for Growing Businesses'],
-            ['payroll', 'Payroll Services', 'Stress-Free Payroll Services for UK Businesses'],
-            ['about', 'About Cain & Co', 'One of the Few ISO 9001 Certified Bookkeepers in the UK'],
-        ] as [$page, $label, $title]) {
+        foreach (
+            [
+                ['home', "London's Trusted Bookkeepers", 'Bookkeeping London'],
+                ['bookkeeping', 'Bookkeeping Services', 'Bookkeeping Services for Growing Businesses'],
+                ['payroll', 'Payroll Services', 'Stress-Free Payroll Services for UK Businesses'],
+                ['about', 'About Cain & Co', 'One of the Few ISO 9001 Certified Bookkeepers in the UK'],
+            ] as [$page, $label, $title]
+        ) {
             HeroSection::query()->updateOrCreate(
                 ['page' => $page],
                 [
@@ -371,18 +384,20 @@ class DatabaseSeeder extends Seeder
                     'secondary_button_text' => 'View Services',
                     'secondary_button_url' => '/services',
                     'is_active' => true,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
 
-        foreach ([
-            ['home', 'services-preview', 'service_grid', 'Our Core Services'],
-            ['bookkeeping', 'pricing', 'pricing_table', 'Clear Bookkeeping Packages'],
-            ['bookkeeping', 'guarantees', 'feature_grid', '7 Reasons You Can Trust Cain & Co'],
-            ['about', 'mission-vision', 'rich_text', 'Mission & Vision'],
-        ] as $index => [$page, $key, $type, $title]) {
+        foreach (
+            [
+                ['home', 'services-preview', 'service_grid', 'Our Core Services'],
+                ['bookkeeping', 'pricing', 'pricing_table', 'Clear Bookkeeping Packages'],
+                ['bookkeeping', 'guarantees', 'feature_grid', '7 Reasons You Can Trust Cain & Co'],
+                ['about', 'mission-vision', 'rich_text', 'Mission & Vision'],
+            ] as $index => [$page, $key, $type, $title]
+        ) {
             PageSection::query()->updateOrCreate(
                 ['page' => $page, 'section_key' => $key],
                 [
@@ -395,8 +410,8 @@ class DatabaseSeeder extends Seeder
                     'settings' => ['layout' => 'grid', 'theme' => 'default'],
                     'is_active' => true,
                     'sort_order' => $index + 1,
-                    'created_by' => $admin->id,
-                    'updated_by' => $admin->id,
+                    'created_by' => 1,
+                    'updated_by' => 1,
                 ]
             );
         }
