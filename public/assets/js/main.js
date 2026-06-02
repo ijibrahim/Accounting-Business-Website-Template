@@ -88,10 +88,56 @@ function renderTestimonials() {
         el.querySelector('.testi-role').textContent = t.role;
     });
 }
-document.getElementById('testiNext').addEventListener('click', () => { testiIdx = (testiIdx + 1) % testimonials.length; renderTestimonials(); });
-document.getElementById('testiPrev').addEventListener('click', () => { testiIdx = (testiIdx - 1 + testimonials.length) % testimonials.length; renderTestimonials(); });
-// Auto advance
-setInterval(() => { testiIdx = (testiIdx + 1) % testimonials.length; renderTestimonials(); }, 5000);
+const testiNext = document.getElementById('testiNext');
+const testiPrev = document.getElementById('testiPrev');
+
+if (testiNext && testiPrev) {
+    testiNext.addEventListener('click', () => { testiIdx = (testiIdx + 1) % testimonials.length; renderTestimonials(); });
+    testiPrev.addEventListener('click', () => { testiIdx = (testiIdx - 1 + testimonials.length) % testimonials.length; renderTestimonials(); });
+    // Auto advance
+    setInterval(() => { testiIdx = (testiIdx + 1) % testimonials.length; renderTestimonials(); }, 5000);
+}
+
+// ===== CONTACT FORM =====
+const contactForm = document.getElementById('contactForm');
+const successMsg = document.getElementById('successMsg');
+
+if (contactForm && successMsg) {
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        contactForm.classList.add('was-validated');
+
+        if (!contactForm.checkValidity()) {
+            return;
+        }
+
+        successMsg.style.display = 'block';
+        contactForm.reset();
+        contactForm.classList.remove('was-validated');
+    });
+}
+
+const payrollForm = document.getElementById('payrollForm');
+const payrollSuccessMsg = document.getElementById('pSuccessMsg');
+
+if (payrollForm && payrollSuccessMsg) {
+    payrollForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        payrollForm.classList.add('was-validated');
+
+        if (!payrollForm.checkValidity()) {
+            return;
+        }
+
+        payrollSuccessMsg.style.display = 'block';
+        payrollForm.reset();
+        payrollForm.classList.remove('was-validated');
+    });
+}
 
 // ===== ACTIVE NAV ON SCROLL =====
 const sections = document.querySelectorAll('section[id]');
