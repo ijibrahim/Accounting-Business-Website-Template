@@ -102,8 +102,26 @@ class AnalyticsController extends Controller
             ->limit(10)
             ->get();
 
-        $recentVisitors = VisitorLog::latest()
-            ->take(20)
+        $recentVisitors = VisitorLog::query()
+            ->latest()
+            ->paginate(10);
+
+        $mapVisitors = VisitorLog::query()
+            ->selectRaw('
+        city,
+        country,
+        latitude,
+        longitude,
+        COUNT(*) as visitors
+    ')
+            ->whereNotNull('latitude')
+            ->whereNotNull('longitude')
+            ->groupBy(
+                'city',
+                'country',
+                'latitude',
+                'longitude'
+            )
             ->get();
 
         return view('admin.analytics.index', compact(
@@ -120,7 +138,8 @@ class AnalyticsController extends Controller
             'topBlogPosts',
             'topCountries',
             'topCities',
-            'recentVisitors'
+            'recentVisitors',
+            'mapVisitors'
         ));
     }
 }

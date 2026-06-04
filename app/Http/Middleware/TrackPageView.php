@@ -69,12 +69,18 @@ class TrackPageView
             $position = Location::get($ip);
 
             VisitorLog::create([
-                'user_id' => Auth::user()->id(),
+                'user_id' => Auth::check() ? Auth::id() : null,
                 'ip' => $ip,
-                'country' => $position?->countryName,
-                'region' => $position?->regionName,
-                'city' => $position?->cityName,
+                'country' => data_get($position, 'countryName'),
+                'region' => data_get($position, 'regionName'),
+                'city' => data_get($position, 'cityName'),
+
+                'latitude' => data_get($position, 'latitude'),
+                'longitude' => data_get($position, 'longitude'),
+
                 'url' => $request->fullUrl(),
+                'browser' => $agent->browser(),
+                'platform' => $agent->platform(),
             ]);
         }
 

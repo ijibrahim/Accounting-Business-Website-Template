@@ -584,6 +584,7 @@
             @yield('content')
         </main>
     </div>
+    @stack('scripts')
 </body>
 <script>
     function toggleMenu(menuId) {

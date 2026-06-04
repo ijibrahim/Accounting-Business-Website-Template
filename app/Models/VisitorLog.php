@@ -12,6 +12,10 @@ class VisitorLog extends Model
         'country',
         'region',
         'city',
+        'latitude',
+        'longitude',
+        'browser',
+        'platform',
         'url',
     ];
 }

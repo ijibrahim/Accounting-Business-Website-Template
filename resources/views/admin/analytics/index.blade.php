@@ -4,7 +4,8 @@
 @section('eyebrow', 'Traffic Overview')
 
 @section('content')
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <section class="metric-grid">
 
         <article class="admin-card metric-card">
@@ -140,7 +141,8 @@
                                 <th>IP</th>
                                 <th>Browser</th>
                                 <th>Device</th>
-                                <th>Visited</th>
+                                <th>Visited UK Time</th>
+                                <th>Visited BD Time</th>
                             </tr>
                         </thead>
 
@@ -162,9 +164,11 @@
                                     <td>{{ $visit->device }}</td>
 
                                     <td>
-                                        {{ $visit->created_at->diffForHumans() }}
+                                        {{ $visit->created_at->timezone('Europe/London')->diffForHumans() }}
                                     </td>
-
+                                    <td>
+                                        {{ $visit->created_at->timezone('Asia/Dhaka')->format('d M Y h:i A') }}
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
@@ -177,6 +181,21 @@
                         </tbody>
 
                     </table>
+                </div>
+
+            </section>
+
+        </div>
+
+        <div class="col-12">
+
+            <section class="admin-card">
+
+                <div class="border-bottom p-3">
+                    <h2 class="h5 mb-0">Visitor Map</h2>
+                </div>
+
+                <div id="visitor-map" style="height:600px;width:100%;">
                 </div>
 
             </section>
@@ -387,3 +406,44 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        const visitors = @json($mapVisitors);
+
+        const map = L.map('visitor-map').setView([20, 0], 2);
+
+        L.tileLayer(
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18
+            }
+        ).addTo(map);
+
+        visitors.forEach(visitor => {
+
+            L.circleMarker(
+                    [
+                        visitor.latitude,
+                        visitor.longitude
+                    ], {
+                        radius: Math.min(
+                            25,
+                            5 + visitor.visitors
+                        )
+                    }
+                )
+                .addTo(map)
+                .bindPopup(`
+        <strong>
+            ${visitor.city}
+        </strong><br>
+
+        ${visitor.country}<br>
+
+        Visitors:
+        ${visitor.visitors}
+    `);
+
+        });
+    </script>
+@endpush
