@@ -34,43 +34,42 @@
             </div>
             <div class="col-6 col-md-3 col-lg-2">
                 <div class="footer-heading">Company</div>
-                <a href="#about" class="footer-link">About Us</a>
-                <a href="#team" class="footer-link">Meet the Team</a>
-                <a href="#testimonials" class="footer-link">Testimonials</a>
-                <a href="#community" class="footer-link">Community</a>
-                <a href="#curry" class="footer-link">Curry &amp; Co</a>
-                <a href="#blog" class="footer-link">Blog</a>
+                <a href="{{ route('about') }}" class="footer-link">About Us</a>
+                <a href="{{ route('team') }}" class="footer-link">Meet the Team</a>
+                <a href="{{ route('testimonials') }}" class="footer-link">Testimonials</a>
+                <a href="{{ route('community') }}" class="footer-link">Community</a>
+                <a href="{{ route('blogs') }}" class="footer-link">Blog</a>
             </div>
             <div class="col-6 col-md-3 col-lg-2">
                 <div class="footer-heading">Services</div>
-                <a href="#services" class="footer-link">Bookkeeping</a>
-                <a href="#services" class="footer-link">Payroll</a>
+                <a href="{{ route('services') }}" class="footer-link">Bookkeeping</a>
+                <a href="{{ route('payroll') }}" class="footer-link">Payroll</a>
                 <a href="#services" class="footer-link">Auto Enrolment</a>
-                <a href="#pricing" class="footer-link">Pricing</a>
-                <a href="#trial" class="footer-link">Free Trial</a>
-                <a href="#referral" class="footer-link">Referral Offer</a>
+                <a href="{{ route('referral') }}" class="footer-link">Referral Offer</a>
             </div>
             <div class="col-md-6 col-lg-4">
-                <div class="footer-heading">Newsletter</div>
+                <div class="footer-heading">Contact Information</div>
+                {{-- <div class="footer-heading">Newsletter</div>
                 <p style="color:rgba(255,255,255,.4);font-size:.85rem;line-height:1.7;margin-bottom:16px;">Monthly
                     bookkeeping tips, HMRC updates, and exclusive offers for London businesses.</p>
                 <div class="footer-newsletter d-flex">
                     <input type="email" placeholder="your@email.co.uk" />
                     <button>Subscribe</button>
-                </div>
+                </div> --}}
                 <div style="margin-top:20px;">
                     <div style="color:rgba(255,255,255,.45);font-size:.82rem;">📞 {{ $setting->phone }}</div>
                     <div style="color:rgba(255,255,255,.45);font-size:.82rem;margin-top:6px;">✉️ {{ $setting->email }}
                     </div>
-                    <div style="color:rgba(255,255,255,.45);font-size:.82rem;margin-top:6px;">📍 {{ $setting->address }}
+                    <div style="color:rgba(255,255,255,.45);font-size:.82rem;margin-top:6px;">📍
+                        {{ $setting->address }}
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-                <p>© 2026 {{ $setting->site_name }}. All rights reserved. Registered in England &amp; Wales
-                    No. 07829416.</p>
+                <p>© 2026 {{ $setting->meta_description }}. All rights reserved. Registered in England &amp; Wales
+                    No. 14722816.</p>
                 <div class="d-flex gap-3">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms &amp; Conditions</a>
